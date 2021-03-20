@@ -2,11 +2,11 @@
  * @Author: Aardduke
  * @Date: 2021-03-19 21:48:29
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-20 10:04:22
- * @Description: 
+ * @LastEditTime: 2021-03-20 16:06:25
+ * @Description: vue file
 -->
 <template>
-  <div>
+  <div style="display: inline-block">
     <input
       type="file"
       :id="inputId"
@@ -66,11 +66,17 @@ export default /*#__PURE__*/ {
     input = document.getElementById(this.inputId);
     image = document.getElementById(this.imgId);
     image.onload = async () => {
+      if (!this.file) {
+        return;
+      }
       // 清除cavas内容
       if (canvas && ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
       canvas = document.getElementById(this.cvsId);
+      if (!canvas) {
+        return;
+      }
       const pst = this.positions();
       if (pst === false) {
         return;

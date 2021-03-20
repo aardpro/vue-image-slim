@@ -2,7 +2,7 @@
  * @Author: Aardpro
  * @Date: 2021-03-20 10:04:27
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-20 13:40:26
+ * @LastEditTime: 2021-03-20 16:20:59
  * @Description: A vue3 component to crop and optimize your images before you upload them
 -->
 # vue-image-slim README
@@ -11,7 +11,7 @@
 ## [Vue3版本 | For Vue3](https://github.com/aardpro/vue3-image-slim)  
 <br>
 
-![示意图sketch](./sketch.png)
+![示意图sketch](http://qiniu-avs.sfsl.xyz/vue-image-slim.png "SKETCH")
 
 <br>
 
@@ -59,7 +59,7 @@ npm install vue-image-slim
     - RB, right-bottom, 右下角
   + w(Number)，可选 目标图片的宽度，缺省是原图宽度
   + h(Number)，可选 目标图片的高度，缺省是原图高度
-
+  + disabled(Boolean)，可选 是否禁止点击文件选择按钮，缺省值否
 
 <br>
 <br>
@@ -109,3 +109,4 @@ npm install vue-image-slim
     - RB, right-bottom
   + w(Number)，optional, px width of final image, default is its original width
   + h(Number)，optional, px height of final image, default is its original height
+  + disabled(Boolean)，optional, if to disable the file selection button, default false
