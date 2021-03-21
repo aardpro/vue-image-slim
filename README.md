@@ -2,7 +2,7 @@
  * @Author: Aardpro
  * @Date: 2021-03-20 10:04:27
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-20 16:20:59
+ * @LastEditTime: 2021-03-21 14:16:59
  * @Description: A vue3 component to crop and optimize your images before you upload them
 -->
 # vue-image-slim README
@@ -11,7 +11,7 @@
 ## [Vue3版本 | For Vue3](https://github.com/aardpro/vue3-image-slim)  
 <br>
 
-![示意图sketch](http://qiniu-avs.sfsl.xyz/vue-image-slim.png "SKETCH")
+![示意图sketch](http://qiniu-avs.sfsl.xyz/vue-image-slim-sketch.png "SKETCH")
 
 <br>
 
