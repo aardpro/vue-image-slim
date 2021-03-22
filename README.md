@@ -1,13 +1,6 @@
-<!--
- * @Author: Aardpro
- * @Date: 2021-03-20 10:04:27
- * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-21 14:16:59
- * @Description: A vue3 component to crop and optimize your images before you upload them
--->
 # vue-image-slim README
 ## 这个组件把你的图片文件进行剪切和优化，适用于vue2。
-## This is a vue2 component to crop and optimize your images before you upload them. [More details](#en)
+## This is a vue2 component to crop and optimize your images before you upload them. [More details.](#en)
 ## [Vue3版本 | For Vue3](https://github.com/aardpro/vue3-image-slim)  
 <br>
 
