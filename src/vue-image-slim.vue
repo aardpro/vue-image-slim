@@ -2,7 +2,7 @@
  * @Author: Aardduke
  * @Date: 2021-03-19 21:48:29
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-27 10:05:45
+ * @LastEditTime: 2021-03-27 11:06:33
  * @Description: vue file
  2021-3-27:因为在element-dialog中，button会触发dialog关闭，改为div
 -->
@@ -17,8 +17,8 @@
     />
     <div
       @click="doClick"
-      :disabled="disabled"
       class="vue-image-slim-button"
+      :class="{ disabled }"
       :style="{ width: btnWidth, height: btnHeight }"
     ></div>
     <div style="display: none">
@@ -214,7 +214,8 @@ export default /*#__PURE__*/ {
   height: 3px;
   width: 90%;
 }
-.vue3-image-slim-button.disabled {
+.vue-image-slim-button.disabled {
   cursor: not-allowed;
+  pointer-events: none;
 }
 </style>
