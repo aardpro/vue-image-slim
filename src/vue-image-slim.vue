@@ -2,8 +2,9 @@
  * @Author: Aardduke
  * @Date: 2021-03-19 21:48:29
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-20 16:06:25
+ * @LastEditTime: 2021-03-27 10:05:45
  * @Description: vue file
+ 2021-3-27:因为在element-dialog中，button会触发dialog关闭，改为div
 -->
 <template>
   <div style="display: inline-block">
@@ -14,11 +15,12 @@
       accept=".jpg,.jpeg,.png"
       @change="onSelectFile()"
     />
-    <button
+    <div
       @click="doClick"
       :disabled="disabled"
       class="vue-image-slim-button"
-    ></button>
+      :style="{ width: btnWidth, height: btnHeight }"
+    ></div>
     <div style="display: none">
       <img :id="imgId" />
       <canvas :id="cvsId"></canvas>
@@ -52,6 +54,16 @@ export default /*#__PURE__*/ {
       //是否禁止点击
       type: Boolean,
       default: false,
+    },
+    btnWidth: {
+      //按钮宽度
+      type: String,
+      default: "100px",
+    },
+    btnHeight: {
+      //按钮高度
+      type: String,
+      default: "100px",
     },
   },
   data() {
@@ -172,8 +184,6 @@ export default /*#__PURE__*/ {
 </script>
 <style scope>
 .vue-image-slim-button {
-  width: 100px;
-  height: 100px;
   position: relative;
   border: 1px solid #eee;
   background: transparent !important;
@@ -203,5 +213,8 @@ export default /*#__PURE__*/ {
   left: 5%;
   height: 3px;
   width: 90%;
+}
+.vue3-image-slim-button.disabled {
+  cursor: not-allowed;
 }
 </style>

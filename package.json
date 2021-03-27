@@ -1,6 +1,6 @@
 {
   "name": "vue-image-slim",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/vue-image-slim.ssr.js",
   "browser": "dist/vue-image-slim.esm.js",

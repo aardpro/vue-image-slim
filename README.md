@@ -53,6 +53,9 @@ npm install vue-image-slim
   + w(Number)，可选 目标图片的宽度，缺省是原图宽度
   + h(Number)，可选 目标图片的高度，缺省是原图高度
   + disabled(Boolean)，可选 是否禁止点击文件选择按钮，缺省值否
+  + btnWidth,按钮宽度，缺省值100px
+  + btnHeight，按钮高度，缺省值100px
+ 
 
 <br>
 <br>
@@ -103,3 +106,5 @@ npm install vue-image-slim
   + w(Number)，optional, px width of final image, default is its original width
   + h(Number)，optional, px height of final image, default is its original height
   + disabled(Boolean)，optional, if to disable the file selection button, default false
+  + btnWidth, click button width, default 100px
+  + btnHeight,click button height, default 100px
