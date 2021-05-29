@@ -2,7 +2,7 @@
  * @Author: Aardduke
  * @Date: 2021-03-19 21:48:29
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-05-29 10:58:18
+ * @LastEditTime: 2021-05-29 11:01:06
  * @Description: vue file
  2021-3-27:因为在element-dialog中，button会触发dialog关闭，改为div
 -->
@@ -67,7 +67,7 @@ export default /*#__PURE__*/ {
       type: String,
       default: "100px",
     },
-    compressRate: {
+    quality: {
       //压缩比率
       type: Number,
       default: 0.75,
@@ -90,7 +90,7 @@ export default /*#__PURE__*/ {
       }
       //如果不提供图片宽度和高度，即保持原有图片尺寸，那么调用compressor进行压缩
       if (this.h <= 0 && this.w <= 0) {
-        blob = await compressorPromise(this.file);
+        blob = await compressorPromise(this.file, { quality: this.quality });
         if (blob) {
           this.$emit("getFile", blob);
           dataURL = await fileToBase64(blob);
@@ -116,7 +116,7 @@ export default /*#__PURE__*/ {
       canvas.height = pst[7];
       ctx = canvas.getContext("2d");
       ctx.drawImage(image, ...pst);
-      dataURL = canvas.toDataURL(this.file.type, this.compressRate);
+      dataURL = canvas.toDataURL(this.file.type, this.quality);
       this.$emit("getDataURL", dataURL);
       blob = await base64ToFile(dataURL, this.file.name, this.file.type);
       this.$emit("getFile", blob);
