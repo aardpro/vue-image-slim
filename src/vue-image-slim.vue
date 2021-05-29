@@ -2,13 +2,14 @@
  * @Author: Aardduke
  * @Date: 2021-03-19 21:48:29
  * @LastEditors: Aardpro
- * @LastEditTime: 2021-03-27 19:43:39
+ * @LastEditTime: 2021-05-29 10:19:54
  * @Description: vue file
  2021-3-27:因为在element-dialog中，button会触发dialog关闭，改为div
 -->
 <template>
   <div style="display: inline-block">
     <input
+      v-if="hasInput"
       type="file"
       :id="inputId"
       style="display: none"
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import { compressorPromise, fileToBase64, base64ToFile } from "./utils"
 const id = new Date().valueOf();
 let input, image, canvas, ctx;
 
@@ -65,9 +67,14 @@ export default /*#__PURE__*/ {
       type: String,
       default: "100px",
     },
+    compressRate:{
+      //压缩比率
+      type: Number,
+      default: 0.75
+    }
   },
   data() {
-    return { file: null, imageWidth: 0, imageHeight: 0 };
+    return { file: null, imageWidth: 0, imageHeight: 0,hasInput:true };
   },
   computed: {
     inputId: () => "input" + id,
@@ -75,11 +82,23 @@ export default /*#__PURE__*/ {
     cvsId: () => "cvs" + id,
   },
   mounted() {
-    input = document.getElementById(this.inputId);
+    let dataURL, blob
     image = document.getElementById(this.imgId);
     image.onload = async () => {
       if (!this.file) {
         return;
+      }
+      //如果不提供图片宽度和高度，即保持原有图片尺寸，那么调用compressor进行压缩
+      if(this.h<=0 && this.h<=0){
+        blob = await compressorPromise(this.file)
+        if(blob) {
+          this.$emit("getblob", blob);
+          dataURL = await fileToBase64(blob)
+          if(dataURL){
+            this.$emit("getDataURL", dataURL);
+          }
+        }
+        return
       }
       // 清除cavas内容
       if (canvas && ctx) {
@@ -97,14 +116,15 @@ export default /*#__PURE__*/ {
       canvas.height = pst[7];
       ctx = canvas.getContext("2d");
       ctx.drawImage(image, ...pst);
-      const dataURL = canvas.toDataURL(this.file.type, 0.75);
+      dataURL = canvas.toDataURL(this.file.type, this.compressRate);
       this.$emit("getDataURL", dataURL);
-      const file = await this.url2File(dataURL, this.file.name, this.file.type);
-      this.$emit("getFile", file);
+      blob = await base64ToFile(dataURL, this.file.name, this.file.type);
+      this.$emit("getFile", blob);
     };
   },
   methods: {
     doClick() {
+    input = document.getElementById(this.inputId);
       if (!input || this.disabled) {
         return;
       }
@@ -113,6 +133,9 @@ export default /*#__PURE__*/ {
     async onSelectFile() {
       if (input.files instanceof FileList && input.files.length > 0) {
         this.file = input.files[0];
+        //重置input，以便能够继续选择同一个文件
+        this.hasInput=false
+        this.$nextTick(()=>{this.hasInput=true})
         var reader = new FileReader();
         reader.addEventListener(
           "load",
@@ -167,17 +190,6 @@ export default /*#__PURE__*/ {
           break;
       }
       return [x, y, w, h, 0, 0, this.w, this.h];
-    },
-    async url2File(url, filename, mimeType) {
-      return new Promise((resolve) => {
-        fetch(url)
-          .then(function (res) {
-            return res.arrayBuffer();
-          })
-          .then(function (buf) {
-            resolve(new File([buf], filename, { type: mimeType }));
-          });
-      });
     },
   },
 };
